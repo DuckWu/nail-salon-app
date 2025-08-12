@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:ersanails.com)"
+      "WebFetch(domain:ersanails.com)",
+      "Bash(mkdir:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
