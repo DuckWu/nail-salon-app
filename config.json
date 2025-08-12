@@ -1,0 +1,142 @@
+{
+  "branding": {
+    "name": "Demo Brand",
+    "tagline": "Premium Nail Salon",
+    "description": "Professional nail services with expert craftsmanship and lasting quality."
+  },
+  "contact": {
+    "address": {
+      "street": "123 Beauty Street",
+      "city": "Salon City",
+      "state": "SC",
+      "zip": "12345"
+    },
+    "phone": "(555) 123-4567",
+    "email": "info@demobrand.com",
+    "hours": {
+      "monday": "9AM-7PM",
+      "tuesday": "9AM-7PM",
+      "wednesday": "9AM-7PM",
+      "thursday": "9AM-7PM",
+      "friday": "9AM-7PM",
+      "saturday": "9AM-6PM",
+      "sunday": "10AM-5PM"
+    }
+  },
+  "services": [
+    {
+      "id": "classic-manicure",
+      "name": "Classic Manicure",
+      "description": "Professional nail care with classic polish application",
+      "price": 35,
+      "duration": "45 minutes",
+      "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "gel-nails",
+      "name": "Gel Nails",
+      "description": "Long-lasting gel manicure that stays perfect for weeks",
+      "price": 45,
+      "duration": "60 minutes",
+      "image": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "nail-art",
+      "name": "Custom Nail Art",
+      "description": "Unique handcrafted designs tailored to your style",
+      "price": 55,
+      "duration": "75 minutes",
+      "image": "https://images.unsplash.com/photo-1556227834-09f1de7b9771?w=400&h=300&fit=crop"
+    },
+    {
+      "id": "acrylic-extensions",
+      "name": "Acrylic Extensions",
+      "description": "Durable acrylic nails for length and strength",
+      "price": 50,
+      "duration": "90 minutes",
+      "image": "https://images.unsplash.com/photo-1521649415036-659258dc424f?w=400&h=300&fit=crop"
+    }
+  ],
+  "heroSlides": [
+    {
+      "id": "slide-1",
+      "title": "Premium Nail Art",
+      "description": "Professional nail services with luxurious handcrafted designs",
+      "buttonText": "Book Now",
+      "buttonAction": "#contact",
+      "image": "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&h=600&fit=crop"
+    },
+    {
+      "id": "slide-2",
+      "title": "Summer Collection",
+      "description": "Bold, vibrant designs perfect for any occasion",
+      "buttonText": "Explore",
+      "buttonAction": "#gallery",
+      "image": "https://images.unsplash.com/photo-1599948113225-9b5d9c0b6de6?w=800&h=600&fit=crop"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gallery-1",
+      "image": "https://images.unsplash.com/photo-1610992015762-45dca7a9d2d2?w=400&h=400&fit=crop",
+      "alt": "Elegant nail art design",
+      "category": "nail-art"
+    },
+    {
+      "id": "gallery-2",
+      "image": "https://images.unsplash.com/photo-1602165832549-1b2d7d529f8d?w=400&h=400&fit=crop",
+      "alt": "French manicure style",
+      "category": "classic"
+    },
+    {
+      "id": "gallery-3",
+      "image": "https://images.unsplash.com/photo-1609075909503-eeb20b6e9d7e?w=400&h=400&fit=crop",
+      "alt": "Colorful nail designs",
+      "category": "gel"
+    },
+    {
+      "id": "gallery-4",
+      "image": "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&h=400&fit=crop",
+      "alt": "Luxury nail treatment",
+      "category": "premium"
+    },
+    {
+      "id": "gallery-5",
+      "image": "https://images.unsplash.com/photo-1599948113225-9b5d9c0b6de6?w=400&h=400&fit=crop",
+      "alt": "Summer nail collection",
+      "category": "seasonal"
+    },
+    {
+      "id": "gallery-6",
+      "image": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=400&h=400&fit=crop",
+      "alt": "Gel nail application",
+      "category": "gel"
+    }
+  ],
+  "features": [
+    {
+      "title": "Expert Craftsmanship",
+      "description": "Handcrafted by professional nail technicians"
+    },
+    {
+      "title": "Long-lasting Quality",
+      "description": "Designs that stay perfect for up to 4 weeks"
+    },
+    {
+      "title": "Zero Damage",
+      "description": "Gentle techniques that protect your natural nails"
+    }
+  ],
+  "socialMedia": {
+    "instagram": "#",
+    "facebook": "#",
+    "twitter": "#"
+  },
+  "theme": {
+    "primaryColor": "#000",
+    "secondaryColor": "#fff",
+    "accentColor": "#f8f8f8",
+    "textColor": "#333",
+    "lightText": "#666"
+  }
+}
