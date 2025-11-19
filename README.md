@@ -4,13 +4,9 @@ This document analyzes whether any Elastic-related services will be impacted by 
 Input is based on discussions with SMEs, particularly Annapurna B., as well as our understanding of the current Elastic usage across dependent systems.
 
 2. Summary of Findings
-|                                                  | Status             | Notes                                             |
-| ------------------------------------------------ | ------------------ | ------------------------------------------------- |
-| **Direct service connections to Elasticsearch**  | **Minimal / None** | Shield Advisor does **not** call ES directly.     |
-| **Indirect dependency via ElasticCommonService** | **Yes**            | ECS internally connects to Elasticsearch.         |
-| **Firewall / Network impact**                    | **Possible**       | AWS-hosted workloads may require FW rules to ECS. |
-| **Functional impact**                            | **None expected**  | No schema, index, or API changes.                 |
-| **Operational risk**                             | **Low**            | Elastic infra unchanged.                          |
+Based on current information, Shield Advisor is not directly connecting to Elasticsearch. All interactions occur through the internal ElasticCommonService (ECS), which remains unchanged. The migration to AWS mainly introduces network path changes, meaning firewall adjustments may be required for AWS-to-ECS communication.
+
+Functionally, no changes are expected to Elasticsearch indices, schemas, or ingestion pipelines. Operational risk is low, with the only notable consideration being potential minor latency due to AWS-to-on-prem routing.
 
 3. Current Architecture (As-Is)
 3.1 Shield Advisor → ElasticCommonService → Elasticsearch
