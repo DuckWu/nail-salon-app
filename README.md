@@ -1,211 +1,94 @@
-# Demo Brand - Nail Salon Website
+1. Overview
 
-A modern, responsive website template for nail salons built with HTML, CSS, and JavaScript. This template uses placeholder content inspired by professional nail salon designs and can be easily customized for any nail salon business.
+This document analyzes whether any Elastic-related services will be impacted by the planned Shield Advisor migration to Pega AWS.
+Input is based on discussions with SMEs, particularly Annapurna B., as well as our understanding of the current Elastic usage across dependent systems.
 
-## Features
+2. Summary of Findings
+Area	Status	Notes
+Direct service connections to Elasticsearch	Minimal / None	Shield Advisor primarily uses ElasticCommonService, not direct ES calls.
+Indirect dependency via ElasticCommonService	Yes	ECS internally connects to our Elasticsearch cluster.
+Firewall / Network impact	Potential change	Hosts directly calling ES may require firewall rules to reach AWS-hosted Pega endpoints.
+Functional impact	None expected	No code-level or API changes for Elasticsearch integrations.
+Operational risk	Low	Migration does not modify Elastic indices, schemas, or ingestion pipelines.
+3. Current Architecture (As-Is)
+3.1 Shield Advisor → ElasticCommonService → Elasticsearch
 
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Modern UI/UX**: Clean, professional design with smooth animations
-- **Easy Customization**: Configuration-based content management
-- **Image Gallery**: Interactive lightbox gallery for showcasing nail art
-- **Contact Form**: Built-in contact form with validation
-- **Smooth Scrolling**: Enhanced navigation experience
-- **Mobile Menu**: Responsive hamburger menu for mobile devices
+Shield Advisor does NOT directly connect to Elasticsearch.
 
-## Getting Started
+Instead, it calls ElasticCommonService, an internal intermediary service.
 
-1. Clone or download this repository
-2. Open `index.html` in a web browser to view the site
-3. Customize the content using the methods described below
+ElasticCommonService handles:
 
-## Project Structure
+Query formatting
 
-```
-nail-salon-app/
-├── index.html          # Main HTML file
-├── styles.css          # CSS styles and responsive design
-├── script.js           # JavaScript functionality
-├── config.json         # Configuration file for easy customization
-└── README.md          # This file
-```
+Authentication
 
-## Customization Guide
+Routing to ES
 
-### Easy Asset Swapping
+Standardized response formatting
 
-The website is designed for easy customization without touching the code:
+3.2 Direct Elastic Connections
 
-#### 1. Using config.json (Recommended)
+SME confirmed:
 
-Edit `config.json` to update:
-- Branding (name, tagline, description)
-- Contact information
-- Services and pricing
-- Hero slider content
-- Gallery images
-- Social media links
-- Color theme
+“I don’t think apart from this they are directly connecting to elasticsearch.”
 
-#### 2. CSS Variables
+Only ECS is in scope.
 
-Update colors and styling in `styles.css`:
+4. Post-Migration Architecture (To-Be)
+4.1 Shield Advisor running on AWS Pega infrastructure
 
-```css
-:root {
-    --primary-color: #000;          /* Main brand color */
-    --secondary-color: #fff;        /* Background color */
-    --accent-color: #f8f8f8;        /* Light accent color */
-    --text-color: #333;             /* Main text color */
-    --light-text: #666;             /* Secondary text color */
-}
-```
+Shield Advisor workloads moved to AWS under Pega runtime.
 
-#### 3. Image Replacement
+ECS remains where it is today (on-prem / hybrid infra).
 
-Replace placeholder images with your own:
-- Hero section images: Update `heroSlides` in `config.json`
-- Service images: Update `services` array in `config.json`
-- Gallery images: Update `gallery` array in `config.json`
-- About section image: Replace the Unsplash URL in `index.html`
+Elasticsearch remains unchanged.
 
-### Content Sections
+4.2 Implications
 
-#### Services
-Update the services section by modifying the `services` array in `config.json`:
+Network path will change:
 
-```json
-{
-  "id": "service-id",
-  "name": "Service Name",
-  "description": "Service description",
-  "price": 35,
-  "duration": "45 minutes",
-  "image": "image-url"
-}
-```
+AWS → On-Prem (ElasticCommonService) → Elasticsearch
 
-#### Contact Information
-Update contact details in `config.json`:
+Main item requiring review: firewall rules.
 
-```json
-{
-  "contact": {
-    "address": {
-      "street": "Your Street Address",
-      "city": "Your City",
-      "state": "State",
-      "zip": "12345"
-    },
-    "phone": "(555) 123-4567",
-    "email": "your-email@domain.com",
-    "hours": {
-      "monday": "9AM-7PM",
-      // ... other days
-    }
-  }
-}
-```
+5. Impact Assessment
+5.1 Functional Impact
 
-#### Gallery
-Add or modify gallery images in `config.json`:
+No functional impact expected:
 
-```json
-{
-  "id": "gallery-1",
-  "image": "image-url",
-  "alt": "Image description",
-  "category": "nail-art"
-}
-```
+No change to Elastic indices or templates.
 
-## Image Sources
+No change in ElasticCommonService APIs.
 
-Current placeholder images are sourced from:
-- [Unsplash](https://unsplash.com) - Free stock photos
-- All images are optimized for web use with appropriate dimensions
+Shield Advisor code does not need modification.
 
-### Recommended Image Sizes
+5.2 Performance Impact
 
-- Hero slider: 800x600px
-- Service cards: 400x300px  
-- Gallery: 400x400px (square)
-- About section: 500x600px
+Minor latency increase possible due to AWS ↔ On-prem path.
 
-## Browser Support
+Not expected to be significant.
 
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
-- Mobile browsers (iOS Safari, Chrome Mobile)
+5.3 Network & Security Impact
 
-## Performance
+SME confirmed:
 
-The website is optimized for performance with:
-- Optimized images via Unsplash URLs
-- Minimal JavaScript
-- CSS animations using transforms
-- Lazy loading for gallery images
+“There won’t be impact except some firewalls to be added if they are directly connecting to Elastic.”
 
-## Deployment
+Actions:
 
-### Static Hosting
-Upload all files to any web server or static hosting service:
-- GitHub Pages
-- Netlify
-- Vercel
-- Traditional web hosting
+Validate Shield Advisor AWS hosts connectivity to ECS.
 
-### Local Development
-For local development with live reload, you can use:
-- Live Server extension in VS Code
-- Python: `python -m http.server 8000`
-- Node.js: `npx serve`
+Ensure no direct ES calls bypass ECS.
 
-## Customization Examples
+5.4 Operational / Monitoring Impact
 
-### Changing Brand Colors
-```css
-:root {
-    --primary-color: #d4af37;  /* Gold */
-    --accent-color: #f5f5dc;   /* Beige */
-}
-```
+No change required for:
 
-### Adding New Services
-```json
-{
-  "id": "pedicure",
-  "name": "Luxury Pedicure",
-  "description": "Complete foot care with relaxing massage",
-  "price": 40,
-  "duration": "60 minutes",
-  "image": "your-image-url"
-}
-```
+Kibana dashboards
 
-### Updating Social Media
-```json
-{
-  "socialMedia": {
-    "instagram": "https://instagram.com/yoursalon",
-    "facebook": "https://facebook.com/yoursalon",
-    "twitter": "https://twitter.com/yoursalon"
-  }
-}
-```
+Watcher alerts
 
-## License
+Logstash pipelines
 
-This template is provided as-is for educational and commercial use. Images from Unsplash follow their respective licenses.
-
-## Support
-
-For questions or issues with customization:
-1. Check this README for guidance
-2. Review the `config.json` structure
-3. Examine the CSS variables in `styles.css`
-
----
-
-**Note**: This template uses "Demo Brand" as placeholder branding. Replace all instances with your actual business information before going live.
+SQS/Lambda ingestion (if applicable)
